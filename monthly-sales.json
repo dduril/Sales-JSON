@@ -1,9 +1,9 @@
-{
+{ "contents": [
+	{
     "category": "Furniture",
     "region": "West",
     "monthlySales":
-    [
-        {
+    [{
             "month":20150101,
             "sales":38
         },
@@ -50,7 +50,6 @@
         {
             "month":20151201,
             "sales":29
-        }
-
-    ]
-}
+        }]
+	}
+]}
