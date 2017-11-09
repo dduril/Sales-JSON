@@ -2,4 +2,4 @@
 
 Simple json data file for use with projects.
 
-This file is currently being used with a d3.js example that uses the Github Web API.
+Examples using this data (in JSON and CSV formats) with d3.js are in the demo folder.
