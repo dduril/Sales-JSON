@@ -1,0 +1,16 @@
+{
+  "name": "demo-d3",
+  "version": "1.0.0",
+  "description": "Demo application for D3.js",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Doug Duril",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^2.1.4",
+    "bootstrap": "^3.3.5",
+    "d3": "^3.5.6"
+  }
+}

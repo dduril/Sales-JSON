@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>D3 Demos</title>
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <script src="node_modules/d3/d3.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        
+        <script>
+
+            var h = 100;
+            var w = 400;
+            var ds;
+            var salesTotal = 0.0;
+            var salesAvg = 0.0;
+            var metrics = [];
+
+            // ------------------------------------------------------
+            // function: buildLine
+            // ------------------------------------------------------
+            function buildLine() {
+                var lineFun = d3.svg.line()
+                    .x(function(d) { return ((d.month-20150001) / 3.25); })
+                    .y(function(d) { return h - d.sales; })
+                    .interpolate("linear");
+
+                var svg = d3.select(".container").append("svg").attr({ width: w, height: h });
+
+                var viz = svg.append("path")
+                    .attr({
+                        d: lineFun(ds),
+                        "stroke" : "purple",
+                        "stroke-width" : 2,
+                        "fill" : "none"
+                    });
+            }
+
+            // ------------------------------------------------------
+            // function: showTotals
+            // ------------------------------------------------------
+            function showTotals() {
+
+                var t = d3.select(".container").append("table");
+
+                // get total
+                for (var i=0; i < ds.length; i++) {
+                    salesTotal += ds[i]['sales'] * 1;
+                }
+                
+                salesAvg = salesTotal / ds.length;
+                
+                // add metrics to array
+                metrics.push("Sales Total: " + salesTotal);
+                metrics.push("Sales Avg: " + salesAvg.toFixed(2));
+
+                // add total to table
+                var tr = t.selectAll("tr")
+                    .data(metrics)
+                    .enter()
+                    .append("tr")
+                    .append("td")
+                    .text(function(d) { return d; });
+            }
+
+            // ------------------------------------------------------
+            // function: showHeader
+            // ------------------------------------------------------
+            function showHeader(){
+                d3.select(".container").append("h3")
+                    .text("Furniture Sales (2015)");
+            }
+            
+            d3.select(".container")
+                .append("h2")
+                .text("Working with CSV Data")
+
+            d3.csv("monthly-sales.csv", function(error, data){
+
+                if (error) {
+                    console.log(error);   
+                } else {
+                    console.log(data);
+                    ds = data;
+                }
+
+                showHeader();
+                buildLine();
+                showTotals();
+
+            });
+
+        </script>
+    </div>
+</body>
+</html>
